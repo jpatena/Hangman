@@ -2,13 +2,34 @@
 # hangman.py
 # by Jaron Patena
 
-correctWord = list("chicken")
+def printMan(misses):
+	print(" +---+\n |   |")
+	if misses == 0:
+		print("     |\n     |\n     |")
+	if misses == 1:
+		print(" O   |\n     |\n     |")
+	elif misses == 2:
+		print(" O   |\n |   |\n     |")
+	elif misses == 3:
+		print(" O   |\n/|   |\n     |")
+	elif misses == 4:
+		print(" O   |\n/|\\  |\n     |")
+	elif misses == 5:
+		print(" O   |\n/|\\  |\n/    |")
+	elif misses == 6:
+		print(" O   |\n/|\\  |\n/ \\  |")
+	print("     |\n=======")
+
+# setup
+correctWord = list("spaghetti")
 guessWord = []
 wrongInputs = []
 for j in range(0, len(correctWord)):
 	guessWord.insert(j, '-')
 
+# main
 while len(wrongInputs) < 6:
+	printMan(len(wrongInputs))
 	print "Missed: " + ", ".join(wrongInputs)
 	print "Word: " + " ".join(guessWord)
 	userInput = raw_input('Guess: ')
@@ -36,4 +57,6 @@ while len(wrongInputs) < 6:
 		break
 
 if len(wrongInputs) == 6:
+	printMan(6)
 	print("game over!")
+
