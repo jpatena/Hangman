@@ -4,17 +4,21 @@
 
 correctWord = list("chicken")
 guessWord = []
+wrongInputs = []
 for j in range(0, len(correctWord)):
 	guessWord.insert(j, '-')
-miss = 0
 
-while miss < 6:
-	userInput = raw_input('Enter: ')
+while len(wrongInputs) < 6:
+	print "Missed: " + ", ".join(wrongInputs)
+	print "Word: " + " ".join(guessWord)
+	userInput = raw_input('Guess: ')
+	print "\n"
 
 	gotItRight = False
 
 	# iterate the string
 	for i in range(0, len(correctWord)):
+
 		# if userinput is in each char of word
 		if correctWord[i] == userInput:
 			del guessWord[i]
@@ -23,9 +27,13 @@ while miss < 6:
 			# flag when guessed right
 			gotItRight = True
 
-	# increment when guessed wrong
+	# record wrong input
 	if gotItRight == False:
-		miss = miss + 1
+		wrongInputs.append(userInput)
 
-	print miss
-	print " ".join(guessWord)
+	if guessWord == correctWord:
+		print("you win!")
+		break
+
+if len(wrongInputs) == 6:
+	print("game over!")
