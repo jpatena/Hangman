@@ -20,43 +20,49 @@ def printMan(misses):
 		print(" O   |\n/|\\  |\n/ \\  |")
 	print("     |\n=======")
 
-# setup
-correctWord = list("spaghetti")
-guessWord = []
-wrongInputs = []
-for j in range(0, len(correctWord)):
-	guessWord.insert(j, '-')
+def main():
+	# setup
+	correctWord = list("spaghetti")
+	guessWord = []
+	wrongInputs = []
+	for j in range(0, len(correctWord)):
+		guessWord.insert(j, '-')
 
-# main
-while len(wrongInputs) < 6:
-	printMan(len(wrongInputs))
-	print "Missed: " + ", ".join(wrongInputs)
-	print "Word: " + " ".join(guessWord)
-	userInput = raw_input('Guess: ')
-	print "\n"
+	# game loop
+	while len(wrongInputs) < 6:
 
-	gotItRight = False
+		# input/output
+		printMan(len(wrongInputs))
+		print "Missed: " + ", ".join(wrongInputs)
+		print "Word: " + " ".join(guessWord)
+		userInput = raw_input('Guess: ')
+		print "\n"
 
-	# iterate the string
-	for i in range(0, len(correctWord)):
+		gotItRight = False
 
-		# if userinput is in each char of word
-		if correctWord[i] == userInput:
-			del guessWord[i]
-			guessWord.insert(i, userInput)
+		# iterate the string
+		for i in range(0, len(correctWord)):
 
-			# flag when guessed right
-			gotItRight = True
+			# if userinput is in each char of word
+			if correctWord[i] == userInput:
+				del guessWord[i]
+				guessWord.insert(i, userInput)
 
-	# record wrong input
-	if gotItRight == False:
-		wrongInputs.append(userInput)
+				# flag when guessed right
+				gotItRight = True
 
-	if guessWord == correctWord:
-		print("you win!")
-		break
+		# record wrong input
+		if gotItRight == False:
+			wrongInputs.append(userInput)
 
-if len(wrongInputs) == 6:
-	printMan(6)
-	print("game over!")
+		if guessWord == correctWord:
+			print("you win!")
+			break
+
+	if len(wrongInputs) == 6:
+		printMan(6)
+		print("game over!")
+
+if __name__ == "__main__":
+    main()
 
